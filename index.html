@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Agenda</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <link rel="stylesheet" type="text/css" href="Style/style.css">
+    </head>
+    <body ng-app="AgendaApp">    
+        <br/>
+        <h1>Agenda Telefônica</h1>
+        <br/><br/><br/>
+        <div ng-controller="AgendaController as controller">
+            <div class="TelaAgenda" ng-show="!controller.contato && !controller.confirmar">
+                <div>
+                    <div style="float: left;"><h4 style="float: left; padding-right: 10px;">Pesquisar Contato: </h4><input class="form-control" ng-model="query" type="text" style="width: 50%;"/></div>
+                    <button type="button" class="btn btn-primary" ng-click="controller.novo()" style="float: right;">+ ADICIONAR CONTATO</button>
+                </div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th><a href="" ng-click="sortField = 'id'">#</a></th><th><a href="" ng-click="sortField = 'nome'">Nome</a></th><th>Telefone</th><th>Celular</th><th>Endereço</th><th>Remover/Editar</th>   
+                        </tr>
+                    </thead>
+                    <tbody>   
+                        <tr ng-repeat="contato in controller.contatos| filter:query | orderBy:sortField">
+                            <td>{{contato.id}}</td><td>{{contato.nome}}</td><td>{{contato.telefone}}</td><td>{{contato.celular}}</td><td>{{contato.endereco}}</td><td><button type="button" class="btn btn-primary" ng-click="controller.alterar(contato)" style="float: right;">E</button><button type="button" class="btn btn-primary" ng-click="controller.confirmarRemocao(contato)" style="float: right;">R</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="TelaAdicionar" ng-show="controller.contato && !controller.confirmar">
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <label for="nome">Nome </label>
+                        <input class="form-control" type="text" id="nome" ng-model="controller.contato.nome"/>
+                    </li>
+                    <li class="list-group-item">
+                        <label for="telefone">Telefone </label>
+                        <input class="form-control" type="text" id="telefone" ng-model="controller.contato.telefone"/>
+                    </li >
+                    <li class="list-group-item">
+                        <label for="celular">Celular </label>
+                        <input class="form-control" type="text" id="celular" ng-model="controller.contato.celular"/>
+                    </li>
+                    <li class="list-group-item">
+                        <label for="endereco">Endereço </label>
+                        <input class="form-control" type="text" id="endereco" ng-model="controller.contato.endereco"/>
+                    </li>
+                </ul>
+
+                <button type="button" class="btn btn-primary" data-ng-click="controller.salvar()">Adicionar</button>
+                <button type="button" class="btn btn-primary" data-ng-click="controller.cancelar()">Cancelar</button>
+            </div>
+
+
+
+            <div class="TelaConfirmar" ng-show="controller.contato && controller.confirmar">
+                <h2>Deseja realmente remover o contato abaixo?</h2>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>#</th><th>Nome</th><th>Telefone</th><th>Celular</th><th>Endereço</th>
+                        </tr>
+                    </thead>
+                    <tbody>   
+                        <tr>
+                            <td>{{controller.contato.id}}</td><td>{{controller.contato.nome}}</td><td>{{controller.contato.telefone}}</td><td>{{controller.contato.celular}}</td><td>{{controller.contato.endereco}}</td>
+                        </tr>
+                    </tbody>
+                </table>                
+
+                <button type="button" class="btn btn-primary" ng-click="controller.removerContato()">Confirmar</button>
+                <button type="button" class="btn btn-primary" ng-click="controller.cancelar()">Cancelar</button>
+
+            </div>
+        </div>
+        <script src="resources/angular.js"></script>
+        <script src="resources/Agenda.js"></script>
+
+        <footer>
+            <h4>Criado por: Thiago Molin, em: 21/03/2017</h4>
+        </footer>
+
+    </body>   
+</html>

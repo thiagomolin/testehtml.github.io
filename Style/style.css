@@ -1,0 +1,47 @@
+body{
+    margin: auto;
+    width: 60%;
+    background: beige;
+}
+
+.BotaoAdicionar{
+    float: right;
+}
+
+footer h4{
+    text-align: center;
+}
+
+.TelaAgenda table {
+        width: 100%;
+    }
+
+thead, tbody, tr, td, th { display: block; }
+
+tr:after {
+    content: ' ';
+    display: block;
+    visibility: hidden;
+    clear: both;
+}
+
+thead th {
+    height: 30px;
+
+    /*text-align: left;*/
+}
+
+.TelaAgenda tbody {
+    height: 500px;
+    overflow-y: auto;
+}
+
+thead {
+    /* fallback */
+}
+
+
+tbody td, thead th {
+    width: 15%;
+    float: left;
+}
